@@ -11,7 +11,7 @@ def my_function(a, b, c, d, e, f, g, h, i, j, k, l, m, n):
     # 長すぎる行はBlackによって改行される
     result = a + b + c + d + e + f + g + h + i + j + k + l + m + n
 
-    print("The result is:", result)
+    print ("The result is:", result)
 
     # 辞書のインデントもフォーマットされる
     my_dict = {"key1": "value1", "key2": "value2"}
