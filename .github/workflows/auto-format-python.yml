@@ -1,0 +1,47 @@
+name: 'Python: Blackによる自動フォーマット'
+
+on:
+  pull_request:
+    paths: ["**/*.py"]
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-python@v5
+      - name: Blackのインストール
+        run: pip install black
+      - name: Blackで自動フォーマットを実行
+        run: black .
+        continue-on-error: true
+      - name: フォーマットによる差分をチェック
+        id: check-diff
+        run: git diff --exit-code || echo "has_changes=true" >> $GITHUB_OUTPUT
+      - name: 差分をPush
+        if: steps.check-diff.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "style: Blackによる自動フォーマット"
+          git push
+      - name: CIを起動
+        if: steps.check-diff.outputs.has_changes == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'ci.yml',
+              ref: '${{ github.head_ref }}'
+            })
