@@ -31,6 +31,6 @@ jobs:
               sha: context.sha,
               state: state,
               target_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
-              context: 'CI / test (workflow_dispatch)',
+              context: 'CI / build (workflow_dispatch)',
               description: description,
             });
