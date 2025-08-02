@@ -1,6 +1,8 @@
 name: 'Python: Blackによる自動フォーマット'
 
 on:
+  push:
+    paths: ["**/*.py"]
   pull_request:
     paths: ["**/*.py"]
 
