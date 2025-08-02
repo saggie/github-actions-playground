@@ -9,7 +9,34 @@ def my_function(a, b, c, d, e, f, g, h, i, j, k, l, m, n):
     """This is a docstring that uses single quotes."""
 
     # 長すぎる行はBlackによって改行される
-    result = a + b + c + d + e + f + g + h + i + j + k + l + m + n +o+p+q+r+s+t+u+v+w+x+y+z
+    result = (
+        a
+        + b
+        + c
+        + d
+        + e
+        + f
+        + g
+        + h
+        + i
+        + j
+        + k
+        + l
+        + m
+        + n
+        + o
+        + p
+        + q
+        + r
+        + s
+        + t
+        + u
+        + v
+        + w
+        + x
+        + y
+        + z
+    )
 
     print("The result is:", result)
 
