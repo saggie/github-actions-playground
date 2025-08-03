@@ -23,7 +23,6 @@ jobs:
         run: pip install black
       - name: Blackで自動フォーマットを実行
         run: black .
-        continue-on-error: true
       - name: フォーマットによる差分をチェック
         id: check-diff
         run: git diff --exit-code || echo "has_changes=true" >> $GITHUB_OUTPUT
