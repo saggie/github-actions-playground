@@ -40,9 +40,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            // GitHub APIを使って `workflow_dispatch` イベントをトリガー
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: 'ci.yml',
-              ref: '${{ github.head_ref || github.ref_name }}'
+              workflow_id: 'ci.yml', // 起動したいワークフローのファイル名
+              ref: '${{ github.head_ref || github.ref_name }}' // ワークフローを起動するブランチ
             })
